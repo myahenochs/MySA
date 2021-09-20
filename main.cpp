@@ -5,5 +5,7 @@
 
 int main(){
 
+    std::cout << "This will be my program :)" << std::endl;
+
     return 0;
 }
