@@ -8,17 +8,22 @@ class MMU{
 
     public:
 
-        MMU(Bus *dataBus, Bus *addressBus, Bus *cpuBus);
+        MMU(Memory *memory, Bus *dataBus, Bus *addressBus, Bus *cpuBus);
+        ~MMU();
 
-        void SetMAR(uint8_t address);
-        void SetMDR(uint8_t data);
+        void SetMAR();
+        void SetMDR();
+        void SetReadWrite(bool flag);
+        void Run();
+
+        uint8_t GetMDR() const;
 
     private:
 
         uint8_t mar, mdr;
         Bus *dataBus, *addressBus, *cpuBus;
+        Memory *ram;
         //Address mapping would also be here, 
         //so I'll be adding the pointers for heap, stack, etc.
-        //This is not a priority at this moment.
 
 };

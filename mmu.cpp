@@ -1,13 +1,28 @@
 #include "mmu.hpp"
 
-MMU::MMU(Bus *dBus, Bus *aBus, Bus *cBus): dataBus(dBus), addressBus(aBus), cpuBus(cBus){
+MMU::MMU(Memory *memory, Bus *dBus, Bus *aBus, Bus *cBus): ram(memory), dataBus(dBus), addressBus(aBus), cpuBus(cBus){
 
 }
 
-void MMU::SetMAR(uint8_t address){
-    mar = address;
+MMU::~MMU(){
+    ram = nullptr;
 }
 
-void MMU::SetMDR(uint8_t data){
-    mdr = data;
+void MMU::SetMAR(){
+    mar = cpuBus->data;
+}
+
+void MMU::SetMDR(){
+    mdr = cpuBus->data;
+}
+
+void MMU::SetReadWrite(bool flag){
+    ram->SetReadWrite(flag);
+}
+
+void MMU::Run(){
+    dataBus->data = mdr;
+    addressBus->data = mar;
+    ram->Run();
+    mdr = dataBus->data;
 }

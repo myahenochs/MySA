@@ -4,6 +4,7 @@
 #include "registerfile.hpp"
 #include "system.hpp"
 #include "memory.hpp"
+#include "mmu.hpp"
 
 void OutputBus(const Bus *bus);
 void OutputStatus(const ALU &alu);
@@ -14,25 +15,22 @@ int main(){
 
     Bus *dBus = new Bus;
     Bus *aBus = new Bus;
-    Bus *outBus = new Bus;
+    Bus *outBus = new Bus; //This will be the internal bus
     Memory ram(dBus, aBus);
+    MMU mmu (&ram, dBus, aBus, outBus);
 
-    dBus->data = 0x03;
-    aBus->data = 0x00;
+    outBus->data = 0x00;
+    mmu.SetMAR();
+    outBus->data = 0x03;
+    mmu.SetMDR();
+    mmu.SetReadWrite(1);
 
     OutputBus(dBus);
     OutputBus(aBus);
 
-    ram.SetReadWrite(1);
-    ram.Run();
+    mmu.Run();
+
     OutputMemory(ram, dBus, aBus);
-
-    dBus->data = 0x00;
-
-    ram.SetReadWrite(0);
-    ram.Run();
-
-    OutputBus(dBus);
 
     delete dBus;
     dBus = nullptr;

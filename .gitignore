@@ -33,3 +33,7 @@
 
 test
 mysa
+.vscode/configurationCache.log
+.gitignore
+.vscode/dryrun.log
+.vscode/targets.log
