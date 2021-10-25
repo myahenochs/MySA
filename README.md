@@ -1,2 +1,2 @@
 # MySA
-Design and implementation of a software-based ISA
+Design and Implementation an 8-Bit ISA Simulation
