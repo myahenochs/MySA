@@ -14,6 +14,7 @@ int main(){
 
     Bus *dBus = new Bus;
     Bus *aBus = new Bus;
+    Bus *outBus = new Bus;
     Memory ram(dBus, aBus);
 
     dBus->data = 0x03;
@@ -36,6 +37,8 @@ int main(){
     delete dBus;
     dBus = nullptr;
     delete aBus;
+    aBus = nullptr;
+    delete outBus;
     aBus = nullptr;
 
     return 0;
