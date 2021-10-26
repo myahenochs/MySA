@@ -19,13 +19,15 @@ int main(){
     Memory ram(dBus, aBus);
     CPU cpu(&ram, dBus, aBus);
 
+    ram.SetReadWrite(1);
     dBus->data = 0x22;
     aBus->data = 0x00;
-    ram.SetReadWrite(1);
     ram.Run();
     dBus->data = 0x33;
     aBus->data = 0x01;
-    ram.SetReadWrite(1);
+    ram.Run();
+    dBus->data = 0x44;
+    aBus->data = 0x02;
     ram.Run();
 
     OutputMemory(ram, dBus, aBus);
