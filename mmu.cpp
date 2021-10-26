@@ -10,10 +10,12 @@ MMU::~MMU(){
 
 void MMU::SetMAR(uint8_t address){
     mar = address;
+    std::cout << "MAR: " << std::hex << std::uppercase << +mar << std::endl;
 }
 
 void MMU::SetMDR(uint8_t data){
     mdr = data;
+    std::cout << "MDR: " << std::hex << std::uppercase << +mdr << std::endl;
 }
 
 void MMU::SetReadWrite(bool flag){

@@ -18,7 +18,7 @@ class MMU{
 
         uint8_t GetMDR() const;
 
-    private:
+    public: //temporary
 
         uint8_t mar, mdr;
         Bus *dataBus, *addressBus, *cpuBus;

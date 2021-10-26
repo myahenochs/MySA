@@ -16,7 +16,7 @@ class CPU{
         void Fetch();
         uint8_t GetNext();
 
-    public:
+    public: //temporary
 
         Bus *internalBus;
         ALU alu;
