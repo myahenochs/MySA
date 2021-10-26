@@ -1,6 +1,6 @@
 CC = c++
-DEPS = main.hpp alu.hpp memory.hpp registerfile.hpp system.hpp mmu.hpp
-OBJ = main.o alu.o memory.o registerfile.o mmu.o
+DEPS = cpu.hpp alu.hpp memory.hpp registerfile.hpp system.hpp mmu.hpp
+OBJ = main.o cpu.o alu.o memory.o registerfile.o mmu.o
 
 %.o: %.cpp $(DEPS)
 	$(CC) -c -o $@ $<

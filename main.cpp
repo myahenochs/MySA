@@ -5,6 +5,7 @@
 #include "system.hpp"
 #include "memory.hpp"
 #include "mmu.hpp"
+#include "cpu.hpp"
 
 void OutputBus(const Bus *bus);
 void OutputStatus(const ALU &alu);
@@ -15,29 +16,30 @@ int main(){
 
     Bus *dBus = new Bus;
     Bus *aBus = new Bus;
-    Bus *outBus = new Bus; //This will be the internal bus
     Memory ram(dBus, aBus);
-    MMU mmu (&ram, dBus, aBus, outBus);
+    CPU cpu(&ram, dBus, aBus);
 
-    outBus->data = 0x00;
-    mmu.SetMAR();
-    outBus->data = 0x03;
-    mmu.SetMDR();
-    mmu.SetReadWrite(1);
-
-    OutputBus(dBus);
-    OutputBus(aBus);
-
-    mmu.Run();
+    dBus->data = 0x22;
+    aBus->data = 0x00;
+    ram.SetReadWrite(1);
+    ram.Run();
+    dBus->data = 0x33;
+    aBus->data = 0x01;
+    ram.SetReadWrite(1);
+    ram.Run();
 
     OutputMemory(ram, dBus, aBus);
+    std::cout << "PC: " << std::hex << std::uppercase << +cpu.pc << std::endl;
 
-    delete dBus;
-    dBus = nullptr;
-    delete aBus;
-    aBus = nullptr;
-    delete outBus;
-    aBus = nullptr;
+    cpu.LDA();
+    std::cout << "A: " << std::hex << std::uppercase << +cpu.a << std::endl;
+    std::cout << "PC: " << std::hex << std::uppercase << +cpu.pc << std::endl;
+
+    cpu.STA();
+    std::cout << "PC: " << std::hex << std::uppercase << +cpu.pc << std::endl;
+    std::cout << std::endl;
+
+    OutputMemory(ram, dBus, aBus);
 
     return 0;
 }

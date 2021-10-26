@@ -8,12 +8,12 @@ MMU::~MMU(){
     ram = nullptr;
 }
 
-void MMU::SetMAR(){
-    mar = cpuBus->data;
+void MMU::SetMAR(uint8_t address){
+    mar = address;
 }
 
-void MMU::SetMDR(){
-    mdr = cpuBus->data;
+void MMU::SetMDR(uint8_t data){
+    mdr = data;
 }
 
 void MMU::SetReadWrite(bool flag){
@@ -25,4 +25,8 @@ void MMU::Run(){
     addressBus->data = mar;
     ram->Run();
     mdr = dataBus->data;
+}
+
+uint8_t MMU::GetMDR() const{
+    return mdr;
 }
