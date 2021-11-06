@@ -14,9 +14,16 @@ class CPU{
         ~CPU();
 
         void Fetch();
+        //Fetches next instruction and stores it in the IR.
+            //mar <- pc
+            //mdr <- M[mar]
+            //ir <- mdr
         uint8_t GetNext();
+        //Fetches the next byte at the location of the PC, then increments the PC. Returns the contents of the MDR.
+            //mar <- pc
+            //mdr <- M[mar]
 
-    public: //temporary
+    public: //temporary for testing
 
         Bus *internalBus;
         ALU alu;
@@ -26,38 +33,60 @@ class CPU{
         uint8_t ir, pc, a, x, y, z;
 
         void HLT();
+            //
         void LDA();
             //mar <- pc
-            //address bus <- mar
-            //memory returns data
-            //mdr <- data bus
+            //mdr <- M[mar]
             //a <- mdr
         void LDX();
             //mar <- pc
-            //address bus <- mar
-            //memory returns data
-            //mdr <- data bus
+            //mdr <- M[mar]
             //x <- mdr
         void LDY();
             //mar <- pc
-            //address bus <- mar
-            //memory returns data
-            //mdr <- data bus
+            //mdr <- M[mar]
             //y <- mdr
         void LDZ();
             //mar <- pc
-            //address bus <- mar
-            //memory returns data
-            //mdr <- data bus
+            //mdr <- M[mar]
             //z <- mdr
         void STA();
+            //mar <- pc
+            //mar <- M[mar]
             //mdr <- a
-            //mar <
+            //M[mar] <- mdr
         void STX();
+            //mar <- pc
+            //mar <- M[mar]
+            //mdr <- x
+            //M[mar] <- mdr
         void STY();
+            //mar <- pc
+            //mar <- M[mar]
+            //mdr <- y
+            //M[mar] <- mdr
         void STZ();
+            //mar <- pc
+            //mar <- M[mar]
+            //mdr <- z
+            //M[mar] <- mdr
         void ADD();
+            //ALUA <- a
+            //mar <- pc
+            //mdr <- M[mar]
+            //ALUB <- mdr
+            //a <- ALUA + ALUB
         void SUB();
+            //ALUA <- a
+            //mar <- pc
+            //mdr <- M[mar]
+            //ALUB <- mdr
+            //a <- ALUA - ALUB
         void MLT();
+            //
+
+        void RST();
+            //pc <- 0
+            //status <- 0
 
 };

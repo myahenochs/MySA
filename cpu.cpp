@@ -51,3 +51,7 @@ void CPU::STA(){
     mmu.SetMDR(a);
     mmu.Run();
 }
+
+void RST(){
+    
+}
