@@ -55,10 +55,6 @@ void CPU::NOP(){
     return;
 }
 
-void CPU::HLT(){
-
-}
-
 void CPU::LDA(){
     std::cout << "=== LDA ===" << std::endl;
     internalBus->data = GetNext();
@@ -133,6 +129,59 @@ void CPU::SUB(){
     rf.StoreRegister(A_REG);
 }
 
-void RST(){
-     
+void CPU::NOT(){
+    std::cout << "=== NOT ===" << std::endl;
+    alu.SetInstruction(NOT_);
+    alu.SetOp1(rf.GetRegister(A_REG));
+    alu.Run();
+    rf.StoreRegister(A_REG);
+}
+
+void CPU::AND(){
+    std::cout << "=== NOT ===" << std::endl;
+    alu.SetInstruction(AND_);
+    alu.SetOp1(rf.GetRegister(A_REG));
+    alu.SetOp2(GetNext());
+    alu.Run();
+    rf.StoreRegister(A_REG);
+}
+
+void CPU::OR(){
+    std::cout << "=== OR ===" << std::endl;
+    alu.SetInstruction(OR_);
+    alu.SetOp1(rf.GetRegister(A_REG));
+    alu.SetOp2(GetNext());
+    alu.Run();
+    rf.StoreRegister(A_REG);
+}
+
+void CPU::XOR(){
+    std::cout << "=== XOR ===" << std::endl;
+    alu.SetInstruction(XOR_);
+    alu.SetOp1(rf.GetRegister(A_REG));
+    alu.SetOp2(GetNext());
+    alu.Run();
+    rf.StoreRegister(A_REG);
+}
+
+void CPU::JMP(){
+    std::cout << "=== JMP ===" << std::endl;
+}
+
+void CPU::JMZ(){
+    std::cout << "=== JMZ ===" << std::endl;
+}
+
+void CPU::JNZ(){
+    std::cout << "=== JNZ ===" << std::endl;
+}
+
+void CPU::HLT(){
+    std::cout << "=== HLT ===" << std::endl;
+}
+
+void CPU::RST(){
+    std::cout << "=== RST ===" << std::endl;
+    pc = 0;
+    //status = 0;
 }

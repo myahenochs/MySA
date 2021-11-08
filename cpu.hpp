@@ -35,58 +35,79 @@ class CPU{
         void NOP();
             //Returns without any operations being done.
 
-        void HLT();
-            //
-
         void LDA();
             //mar <- pc
             //mdr <- M[mar]
             //a <- mdr
+
         void LDX();
             //mar <- pc
             //mdr <- M[mar]
             //x <- mdr
+
         void LDY();
             //mar <- pc
             //mdr <- M[mar]
             //y <- mdr
+
         void LDZ();
             //mar <- pc
             //mdr <- M[mar]
             //z <- mdr
+
         void STA();
             //mar <- pc
             //mar <- M[mar]
             //mdr <- a
             //M[mar] <- mdr
+
         void STX();
             //mar <- pc
             //mar <- M[mar]
             //mdr <- x
             //M[mar] <- mdr
+
         void STY();
             //mar <- pc
             //mar <- M[mar]
             //mdr <- y
             //M[mar] <- mdr
+
         void STZ();
             //mar <- pc
             //mar <- M[mar]
             //mdr <- z
             //M[mar] <- mdr
+
         void ADD();
             //ALUA <- a
             //mar <- pc
             //mdr <- M[mar]
             //ALUB <- mdr
             //a <- ALUA + ALUB
+
         void SUB();
             //ALUA <- a
             //mar <- pc
             //mdr <- M[mar]
             //ALUB <- mdr
             //a <- ALUA - ALUB
-        void MLT();
+            
+        void NOT();
+
+        void AND();
+
+        void OR();
+
+        void XOR();
+
+        void JMP();
+
+        void JMZ();
+
+        void JNZ();
+
+        void HLT();
             //
 
         void RST();
