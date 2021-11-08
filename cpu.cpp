@@ -15,6 +15,31 @@ CPU::~CPU(){
 
 void CPU::Fetch(){
     ir = GetNext();
+    switch (ir){
+        case 0x00: NOP();
+            break;
+        case 0x01: LDA();
+            break;
+        case 0x02: LDX();
+            break;
+        case 0x03: LDY();
+            break;
+        case 0x04: LDZ();
+            break;
+        case 0x05: STA();
+            break;
+        case 0x06: STX();
+            break;
+        case 0x07: STY();
+            break;
+        case 0x08: STZ();
+            break;
+        case 0x09: ADD();
+            break;
+        case 0x0A: SUB();
+            break;
+        default: HLT();
+    }
 }
 
 uint8_t CPU::GetNext(){
@@ -25,31 +50,68 @@ uint8_t CPU::GetNext(){
     return mmu.GetMDR();
 }
 
-void HLT(){
+void CPU::NOP(){
+    return;
+}
+
+void CPU::HLT(){
 
 }
 
 void CPU::LDA(){
-    a = GetNext();
+    internalBus->data = GetNext();
+    rf.StoreRegister(A_REG);
 }
 
 void CPU::LDX(){
-    x = GetNext();
+    internalBus->data = GetNext();
+    rf.StoreRegister(X_REG);
 }
 
 void CPU::LDY(){
-    y = GetNext();
+    internalBus->data = GetNext();
+    rf.StoreRegister(Y_REG);
 }
 
 void CPU::LDZ(){
-    z = GetNext();
+    internalBus->data = GetNext();
+    rf.StoreRegister(Z_REG);
 }
 
 void CPU::STA(){
     mmu.SetMAR(GetNext());
-    mmu.SetMDR(a);
+    mmu.SetMDR(rf.GetRegister(A_REG));
     mmu.SetReadWrite(1);
     mmu.Run();
+}
+
+void CPU::STX(){
+    mmu.SetMAR(GetNext());
+    mmu.SetMDR(rf.GetRegister(X_REG));
+    mmu.SetReadWrite(1);
+    mmu.Run();
+}
+
+void CPU::STY(){
+    mmu.SetMAR(GetNext());
+    mmu.SetMDR(rf.GetRegister(Y_REG));
+    mmu.SetReadWrite(1);
+    mmu.Run();
+}
+
+void CPU::STZ(){
+    mmu.SetMAR(GetNext());
+    mmu.SetMDR(rf.GetRegister(Z_REG));
+    mmu.SetReadWrite(1);
+    mmu.Run();
+}
+
+void CPU::ADD(){
+
+}
+
+void CPU::SUB(){
+
 }
 
 void RST(){

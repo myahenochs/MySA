@@ -3,16 +3,18 @@
 #include "system.hpp"
 #include <iostream> //temporary
 
+enum Register {
+    A_REG,
+    X_REG,
+    Y_REG,
+    Z_REG
+};
+
 class RegisterFile {
 
     public:
 
-        enum Register {
-            A_REG,
-            X_REG,
-            Y_REG,
-            Z_REG
-        };
+        
 
         RegisterFile(Bus *inputBus);
 

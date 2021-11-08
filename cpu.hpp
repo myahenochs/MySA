@@ -30,10 +30,14 @@ class CPU{
         RegisterFile rf;
         MMU mmu;
 
-        uint8_t ir, pc, a, x, y, z;
+        uint8_t ir, pc;
+
+        void NOP();
+            //Returns without any operations being done.
 
         void HLT();
             //
+
         void LDA();
             //mar <- pc
             //mdr <- M[mar]

@@ -35,7 +35,7 @@ int main(){
     std::cout << "PC: " << std::hex << std::uppercase << +cpu.pc << std::endl;
 
     cpu.LDA();
-    std::cout << "A: " << std::hex << std::uppercase << +cpu.a << std::endl;
+    std::cout << "A: " << std::hex << std::uppercase << +cpu.rf.GetRegister(A_REG) << std::endl;
     std::cout << "PC: " << std::hex << std::uppercase << +cpu.pc << std::endl;
 
     cpu.STA();
@@ -73,9 +73,9 @@ void OutputStatus(const ALU &alu){
 void OutputRegFile(const RegisterFile &rf){
     std::cout << "======REGISTERS=======" << std::endl << std::endl;
     for(int i = 0; i<4; i++){
-        std::cout << "DEC: " << std::dec << +rf.GetRegister((RegisterFile::Register)i) << std::endl;
-        std::cout << "HEX: " << std::hex << std::uppercase << +rf.GetRegister((RegisterFile::Register)i) << std::endl;
-        std::cout << "BIN: " << std::bitset<8>(rf.GetRegister((RegisterFile::Register)i)) << std::endl << std::endl;
+        std::cout << "DEC: " << std::dec << +rf.GetRegister((Register)i) << std::endl;
+        std::cout << "HEX: " << std::hex << std::uppercase << +rf.GetRegister((Register)i) << std::endl;
+        std::cout << "BIN: " << std::bitset<8>(rf.GetRegister((Register)i)) << std::endl << std::endl;
     }
 }
 
