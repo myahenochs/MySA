@@ -164,6 +164,22 @@ void CPU::XOR(){
     rf.StoreRegister(A_REG);
 }
 
+void CPU::BSL(){
+    std::cout << "=== OR ===" << std::endl;
+    alu.SetInstruction(BSL_);
+    alu.SetOp1(rf.GetRegister(A_REG));
+    alu.Run();
+    rf.StoreRegister(A_REG);
+}
+
+void CPU::BSR(){
+    std::cout << "=== OR ===" << std::endl;
+    alu.SetInstruction(BSL_);
+    alu.SetOp1(rf.GetRegister(A_REG));
+    alu.Run();
+    rf.StoreRegister(A_REG);
+}
+
 void CPU::JMP(){
     std::cout << "=== JMP ===" << std::endl;
 }

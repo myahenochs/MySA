@@ -92,7 +92,7 @@ class CPU{
             //mdr <- M[mar]
             //ALUB <- mdr
             //a <- ALUA - ALUB
-            
+
         void NOT();
 
         void AND();
@@ -100,6 +100,10 @@ class CPU{
         void OR();
 
         void XOR();
+
+        void BSL();
+
+        void BSR();
 
         void JMP();
 
