@@ -1,6 +1,6 @@
 #include "mmu.hpp"
 
-MMU::MMU(Memory *memory, Bus *dBus, Bus *aBus, Bus *cBus): ram(memory), dataBus(dBus), addressBus(aBus), cpuBus(cBus){
+MMU::MMU(Memory *memory, Bus *dBus, Bus *aBus): ram(memory), dataBus(dBus), addressBus(aBus){
 
 }
 
@@ -10,12 +10,10 @@ MMU::~MMU(){
 
 void MMU::SetMAR(uint8_t address){
     mar = address;
-    std::cout << "MAR: " << std::hex << std::uppercase << +mar << std::endl;
 }
 
 void MMU::SetMDR(uint8_t data){
     mdr = data;
-    std::cout << "MDR: " << std::hex << std::uppercase << +mdr << std::endl;
 }
 
 void MMU::SetReadWrite(bool flag){

@@ -4,7 +4,7 @@ CPU::CPU(Memory *memory, Bus *dataBus, Bus *addressBus):
     internalBus(new Bus),
     alu{internalBus}, 
     rf{internalBus}, 
-    mmu{memory, dataBus, addressBus, internalBus},
+    mmu{memory, dataBus, addressBus},
     pc(0)
 {}
 
@@ -46,12 +46,12 @@ void CPU::LDZ(){
 }
 
 void CPU::STA(){
-    mmu.SetReadWrite(1);
     mmu.SetMAR(GetNext());
     mmu.SetMDR(a);
+    mmu.SetReadWrite(1);
     mmu.Run();
 }
 
 void RST(){
-    
+     
 }

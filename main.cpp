@@ -18,6 +18,7 @@ int main(){
     Bus *aBus = new Bus;
     Memory ram(dBus, aBus);
     CPU cpu(&ram, dBus, aBus);
+    MMU mmu(&ram, dBus, aBus);
 
     ram.SetReadWrite(1);
     dBus->data = 0x22;

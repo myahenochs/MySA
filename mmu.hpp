@@ -2,13 +2,12 @@
 
 #include "system.hpp"
 #include "memory.hpp"
-#include <iostream> //temporary for testing
 
 class MMU{
 
     public:
 
-        MMU(Memory *memory, Bus *dataBus, Bus *addressBus, Bus *cpuBus);
+        MMU(Memory *memory, Bus *dataBus, Bus *addressBus);
         ~MMU();
 
         void SetMAR(uint8_t address);
@@ -18,7 +17,7 @@ class MMU{
 
         uint8_t GetMDR() const;
 
-    public: //temporary
+    private:
 
         uint8_t mar, mdr;
         Bus *dataBus, *addressBus, *cpuBus;
