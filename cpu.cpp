@@ -51,6 +51,7 @@ uint8_t CPU::GetNext(){
 }
 
 void CPU::NOP(){
+    std::cout << "=== NOP ===" << std::endl;
     return;
 }
 
@@ -59,26 +60,31 @@ void CPU::HLT(){
 }
 
 void CPU::LDA(){
+    std::cout << "=== LDA ===" << std::endl;
     internalBus->data = GetNext();
     rf.StoreRegister(A_REG);
 }
 
 void CPU::LDX(){
+    std::cout << "=== LDX ===" << std::endl;
     internalBus->data = GetNext();
     rf.StoreRegister(X_REG);
 }
 
 void CPU::LDY(){
+    std::cout << "=== LDY ===" << std::endl;
     internalBus->data = GetNext();
     rf.StoreRegister(Y_REG);
 }
 
 void CPU::LDZ(){
+    std::cout << "=== LDZ ===" << std::endl;
     internalBus->data = GetNext();
     rf.StoreRegister(Z_REG);
 }
 
 void CPU::STA(){
+    std::cout << "=== STA ===" << std::endl;
     mmu.SetMAR(GetNext());
     mmu.SetMDR(rf.GetRegister(A_REG));
     mmu.SetReadWrite(1);
@@ -86,6 +92,7 @@ void CPU::STA(){
 }
 
 void CPU::STX(){
+    std::cout << "=== STX ===" << std::endl;
     mmu.SetMAR(GetNext());
     mmu.SetMDR(rf.GetRegister(X_REG));
     mmu.SetReadWrite(1);
@@ -93,6 +100,7 @@ void CPU::STX(){
 }
 
 void CPU::STY(){
+    std::cout << "=== STY ===" << std::endl;
     mmu.SetMAR(GetNext());
     mmu.SetMDR(rf.GetRegister(Y_REG));
     mmu.SetReadWrite(1);
@@ -100,6 +108,7 @@ void CPU::STY(){
 }
 
 void CPU::STZ(){
+    std::cout << "=== STZ ===" << std::endl;
     mmu.SetMAR(GetNext());
     mmu.SetMDR(rf.GetRegister(Z_REG));
     mmu.SetReadWrite(1);
@@ -107,11 +116,21 @@ void CPU::STZ(){
 }
 
 void CPU::ADD(){
-
+    std::cout << "=== ADD ===" << std::endl;
+    alu.SetInstruction(ADD_);
+    alu.SetOp1(rf.GetRegister(A_REG));
+    alu.SetOp2(GetNext());
+    alu.Run();
+    rf.StoreRegister(A_REG);
 }
 
 void CPU::SUB(){
-
+    std::cout << "=== SUB ===" << std::endl;
+    alu.SetInstruction(SUB_);
+    alu.SetOp1(rf.GetRegister(A_REG));
+    alu.SetOp2(GetNext());
+    alu.Run();
+    rf.StoreRegister(A_REG);
 }
 
 void RST(){

@@ -21,28 +21,28 @@ int main(){
     MMU mmu(&ram, dBus, aBus);
 
     ram.SetReadWrite(1);
-    dBus->data = 0x22;
+    dBus->data = 0x01;
     aBus->data = 0x00;
     ram.Run();
-    dBus->data = 0x33;
+    dBus->data = 0x03;
     aBus->data = 0x01;
     ram.Run();
-    dBus->data = 0x44;
+    dBus->data = 0x09;
     aBus->data = 0x02;
+    ram.Run();
+    dBus->data = 0x02;
+    aBus->data = 0x03;
     ram.Run();
 
     OutputMemory(ram, dBus, aBus);
-    std::cout << "PC: " << std::hex << std::uppercase << +cpu.pc << std::endl;
 
-    cpu.LDA();
-    std::cout << "A: " << std::hex << std::uppercase << +cpu.rf.GetRegister(A_REG) << std::endl;
-    std::cout << "PC: " << std::hex << std::uppercase << +cpu.pc << std::endl;
+    cpu.Fetch();
+    std::cout << "A: " << std::hex << std::uppercase << +cpu.rf.GetRegister((Register)A_REG) << std::endl;
+    
+    cpu.Fetch();
+    std::cout << "A: " << std::hex << std::uppercase << +cpu.rf.GetRegister((Register)A_REG) << std::endl;
+    
 
-    cpu.STA();
-    std::cout << "PC: " << std::hex << std::uppercase << +cpu.pc << std::endl;
-    std::cout << std::endl;
-
-    OutputMemory(ram, dBus, aBus);
 
     return 0;
 }

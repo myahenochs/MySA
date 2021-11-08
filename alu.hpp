@@ -2,20 +2,20 @@
 
 #include "system.hpp"
 
+enum ALUOperation {
+    ADD_,
+    SUB_,
+    NOT_,
+    AND_,
+    OR_,
+    XOR_,
+    BSL_,
+    BSR_
+};
+
 class ALU{
     
     public:
-
-        enum Operation {
-            ADD_,
-            SUB_,
-            NOT_,
-            AND_,
-            OR_,
-            XOR_,
-            BSL_,
-            BSR_
-        };
 
         ALU(Bus *outputBus);
 
