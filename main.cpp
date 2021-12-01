@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <bitset>
 #include "alu.hpp"
 #include "registerfile.hpp"
@@ -19,30 +20,44 @@ int main(){
     Memory ram(dBus, aBus);
     CPU cpu(&ram, dBus, aBus);
     MMU mmu(&ram, dBus, aBus);
+    std::string input;
+    bool start = false;
+    int hex = 0x00, inc = 0;
 
     ram.SetReadWrite(1);
-    dBus->data = 0x01;
-    aBus->data = 0x00;
-    ram.Run();
-    dBus->data = 0x03;
-    aBus->data = 0x01;
-    ram.Run();
-    dBus->data = 0x09;
-    aBus->data = 0x02;
-    ram.Run();
-    dBus->data = 0x02;
-    aBus->data = 0x03;
-    ram.Run();
+
+    while (!start){
+        std::stringstream ss;
+
+        getline(std::cin, input);
+        ss << input;
+
+        if(input.length()!=0 && inc <= ram.MAX_SIZE){
+            ss >> std::hex >> hex;
+            aBus->data = inc;
+            dBus->data = hex;
+            ram.Run();
+        }
+        else{
+            start = true;
+        }
+
+        inc++;
+    }
 
     OutputMemory(ram, dBus, aBus);
 
-    cpu.Fetch();
-    std::cout << "A: " << std::hex << std::uppercase << +cpu.rf.GetRegister((Register)A_REG) << std::endl;
-    
-    cpu.Fetch();
-    std::cout << "A: " << std::hex << std::uppercase << +cpu.rf.GetRegister((Register)A_REG) << std::endl;
-    
+    if(inc > 0){
+        do{
+            cpu.Fetch();
+        }while (cpu.pc <= ram.MAX_SIZE && !cpu.IsHalted());
+    }
 
+    std::cout << std::endl;
+
+    OutputRegFile(cpu.rf);
+
+    OutputStatus(cpu.alu);
 
     return 0;
 }
@@ -96,5 +111,5 @@ void OutputMemory(Memory &ram, Bus *dBus, Bus *aBus){
             std::cout << '\n';
         }
     }
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
 }

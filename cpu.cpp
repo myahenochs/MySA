@@ -5,7 +5,8 @@ CPU::CPU(Memory *memory, Bus *dataBus, Bus *addressBus):
     alu{internalBus}, 
     rf{internalBus}, 
     mmu{memory, dataBus, addressBus},
-    pc(0)
+    pc(0),
+    halt(false)
 {}
 
 CPU::~CPU(){
@@ -38,6 +39,28 @@ void CPU::Fetch(){
             break;
         case 0x0A: SUB();
             break;
+        case 0x0B: NOT();
+            break;
+        case 0x0C: AND();
+            break;
+        case 0x0D: OR();
+            break;
+        case 0x0E: XOR();
+            break;
+        case 0x0F: BSL();
+            break;
+        case 0x10: BSR();
+            break;
+        case 0x11: JMP();
+            break;
+        case 0x12: JMZ();
+            break;
+        case 0x13: JNZ();
+            break;
+        case 0x14: HLT();
+            break;
+        case 0x15: RST();
+            break;
         default: HLT();
     }
 }
@@ -48,6 +71,10 @@ uint8_t CPU::GetNext(){
     mmu.Run();
     pc++;
     return mmu.GetMDR();
+}
+
+bool CPU::IsHalted() const{
+    return halt;
 }
 
 void CPU::NOP(){
@@ -182,22 +209,36 @@ void CPU::BSR(){
 
 void CPU::JMP(){
     std::cout << "=== JMP ===" << std::endl;
+    pc = GetNext();
 }
 
 void CPU::JMZ(){
     std::cout << "=== JMZ ===" << std::endl;
+    if(alu.GetStatus()&ZERO){
+        pc = GetNext();
+    }
+    else {
+        GetNext();
+    }
 }
 
 void CPU::JNZ(){
     std::cout << "=== JNZ ===" << std::endl;
+    if(!alu.GetStatus()&ZERO){
+        pc = GetNext();
+    }
+    else{
+        GetNext();
+    }
 }
 
 void CPU::HLT(){
     std::cout << "=== HLT ===" << std::endl;
+    halt = true;
 }
 
 void CPU::RST(){
     std::cout << "=== RST ===" << std::endl;
     pc = 0;
-    //status = 0;
+    alu.SetStatus(0x00);
 }

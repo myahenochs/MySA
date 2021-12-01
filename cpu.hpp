@@ -22,6 +22,8 @@ class CPU{
         //Fetches the next byte at the location of the PC, then increments the PC. Returns the contents of the MDR.
             //mar <- pc
             //mdr <- M[mar]
+            //
+        bool IsHalted() const;
 
     public: //temporary for testing
 
@@ -31,6 +33,7 @@ class CPU{
         MMU mmu;
 
         uint8_t ir, pc;
+        bool halt;
 
         void NOP();
             //Returns without any operations being done.
