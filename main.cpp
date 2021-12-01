@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <bitset>
 #include "alu.hpp"
@@ -13,51 +14,65 @@ void OutputStatus(const ALU &alu);
 void OutputRegFile(const RegisterFile &rf);
 void OutputMemory(Memory &ram, Bus *dBus, Bus *aBus);
 
-int main(){
+int main(int argc, char *argv[]){
 
     Bus *dBus = new Bus;
     Bus *aBus = new Bus;
     Memory ram(dBus, aBus);
     CPU cpu(&ram, dBus, aBus);
     MMU mmu(&ram, dBus, aBus);
-    std::string input;
+    std::ifstream inFile;
+    std::string input, filename;
     bool start = false;
     int hex = 0x00, inc = 0;
 
-    ram.SetReadWrite(1);
+    if(argc == 2){
+        filename = argv[1];
 
-    while (!start){
-        std::stringstream ss;
+        ram.SetReadWrite(1);
 
-        getline(std::cin, input);
-        ss << input;
+        inFile.open(filename);
+        while (!start){
 
-        if(input.length()!=0 && inc <= ram.MAX_SIZE){
-            ss >> std::hex >> hex;
-            aBus->data = inc;
-            dBus->data = hex;
-            ram.Run();
+            std::stringstream ss;
+            getline(inFile, input);
+            ss << input;
+
+            if(input.length()!=0 && inc <= ram.MAX_SIZE){
+                ss >> std::hex >> hex;
+                aBus->data = inc;
+                dBus->data = hex;
+                ram.Run();
+            }
+            else{
+                start = true;
+            }
+            inc++;
         }
-        else{
-            start = true;
+        inFile.close();
+
+        OutputMemory(ram, dBus, aBus);
+
+        std::cout << "Continue? y/n > ";
+        input = getchar();
+        std::cout << std::endl;
+
+        if(input == "y"){
+            if(inc > 0){
+                do{
+                    cpu.Fetch();
+                }while (cpu.pc <= ram.MAX_SIZE && !cpu.IsHalted());
+            }
+
+            std::cout << std::endl;
+            OutputRegFile(cpu.rf);
+            OutputStatus(cpu.alu);
+            OutputMemory(ram, dBus, aBus);
         }
-
-        inc++;
     }
-
-    OutputMemory(ram, dBus, aBus);
-
-    if(inc > 0){
-        do{
-            cpu.Fetch();
-        }while (cpu.pc <= ram.MAX_SIZE && !cpu.IsHalted());
+    else{
+        std::cout << "Please enter a file name as an argument." << std::endl;
     }
-
-    std::cout << std::endl;
-
-    OutputRegFile(cpu.rf);
-
-    OutputStatus(cpu.alu);
 
     return 0;
 }
@@ -95,12 +110,13 @@ void OutputRegFile(const RegisterFile &rf){
 }
 
 void OutputMemory(Memory &ram, Bus *dBus, Bus *aBus){
+    std::cout << "======MEMORY=======" << std::endl << std::endl;
     int size = ram.MAX_SIZE;
     ram.SetReadWrite(0);
     for(int i = 1; i < size+1; i++){
         aBus->data=i-1;
         ram.Run();
-        if(dBus->data<0x10){
+        if(dBus->data < 0x10){
             std::cout << '0';
         }
         std::cout << std::hex << std::uppercase << +dBus->data;
