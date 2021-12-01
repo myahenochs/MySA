@@ -29,3 +29,15 @@ I took this course because I had limited choice in the offered classes, not to p
   2.  Reduce abstraction as I learn more about computer architecture. Digital logic may either be a part of a forked project or added to this one. 
   3.  Implement a full system. This includes non-volatile memory and a graphics/picture processing unit. Modularity would continue to be a main design goal as more devices are added. 
   4.  Adding parallelism to further create a more true-to-life simulation.
+
+## To Compile
+  This program was completely developed in Linux and has not been tested in Windows or OS X whatsoever.
+
+  1. `git clone https://github.com/myahenochs/MySA`
+  2. `cd MySA`
+  3. `make`
+
+## To Use
+  Create a file containing each byte of input on a separate line. Run the binary with the file redirected into it (example: `test < input.txt`). 
+  
+  main.cpp has some simple functions to use in order to check input and output and can be changed at will.
