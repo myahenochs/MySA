@@ -1,4 +1,5 @@
 #include "cpu.hpp"
+#include <bitset> //temporary for testing
 
 CPU::CPU(Memory *memory, Bus *dataBus, Bus *addressBus): 
     internalBus(new Bus),
@@ -214,21 +215,27 @@ void CPU::JMP(){
 
 void CPU::JMZ(){
     std::cout << "=== JMZ ===" << std::endl;
+
     if(alu.GetStatus()&ZERO){
+        std::cout << "ZERO" << std::endl;
         pc = GetNext();
     }
-    else {
+    else{
+        std::cout << "NOT ZERO" << std::endl;
         GetNext();
     }
 }
 
 void CPU::JNZ(){
     std::cout << "=== JNZ ===" << std::endl;
-    if(!alu.GetStatus()&ZERO){
-        pc = GetNext();
+
+    if(alu.GetStatus()&ZERO){
+        std::cout << "ZERO" << std::endl;
+        GetNext();
     }
     else{
-        GetNext();
+        std::cout << "NOT ZERO" << std::endl;
+        pc = GetNext();
     }
 }
 

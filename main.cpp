@@ -32,13 +32,13 @@ int main(int argc, char *argv[]){
         ram.SetReadWrite(1);
 
         inFile.open(filename);
-        while (!start){
+        while (!start && !inFile.eof()){
 
             std::stringstream ss;
             getline(inFile, input);
             ss << input;
 
-            if(input.length()!=0 && inc <= ram.MAX_SIZE){
+            if(inc <= ram.MAX_SIZE){
                 ss >> std::hex >> hex;
                 aBus->data = inc;
                 dBus->data = hex;
