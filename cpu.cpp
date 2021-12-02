@@ -145,6 +145,7 @@ void CPU::ADD(){
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.SetOp2(GetNext());
     alu.Run();
+    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
@@ -154,6 +155,7 @@ void CPU::SUB(){
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.SetOp2(GetNext());
     alu.Run();
+    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
@@ -162,6 +164,7 @@ void CPU::NOT(){
     alu.SetInstruction(NOT_);
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.Run();
+    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
@@ -171,6 +174,7 @@ void CPU::AND(){
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.SetOp2(GetNext());
     alu.Run();
+    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
@@ -180,6 +184,7 @@ void CPU::OR(){
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.SetOp2(GetNext());
     alu.Run();
+    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
@@ -189,6 +194,7 @@ void CPU::XOR(){
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.SetOp2(GetNext());
     alu.Run();
+    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
@@ -197,6 +203,7 @@ void CPU::BSL(){
     alu.SetInstruction(BSL_);
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.Run();
+    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
@@ -205,6 +212,7 @@ void CPU::BSR(){
     alu.SetInstruction(BSL_);
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.Run();
+    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
