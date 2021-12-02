@@ -56,8 +56,9 @@ int main(int argc, char *argv[]){
         std::cout << "Continue? y/n > ";
         input = getchar();
         std::cout << std::endl;
+        for (auto & c: input) c = toupper(c);
 
-        if(input == "y"){
+        if(input == "Y"){
             if(inc > 0){
                 do{
                     cpu.Fetch();
