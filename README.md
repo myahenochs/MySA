@@ -38,6 +38,6 @@ I took this course because I had limited choice in the offered classes, not to p
   3. `make`
 
 ## To Use
-  Create a file containing each byte of input on a separate line. Run the binary with the file redirected into it (example: `test < input.txt`). 
+  Create a file containing each byte of input on a separate line, then pass it as a command line argument to the program.
   
   main.cpp has some simple functions to use in order to check input and output and can be changed at will.
