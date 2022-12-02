@@ -31,7 +31,7 @@ I took this course because I had limited choice in the offered classes, not to p
   4.  Adding parallelism to further create a more true-to-life simulation.
 
 ## To Compile
-  This program was completely developed in Linux and has not been tested in Windows or OS X whatsoever.
+  This program was completely developed in Linux and has not been tested in Windows or on a Mac whatsoever.
 
   1. `git clone https://github.com/myahenochs/MySA`
   2. `cd MySA`
