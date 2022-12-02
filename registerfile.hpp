@@ -14,8 +14,6 @@ class RegisterFile {
 
     public:
 
-        
-
         RegisterFile(Bus *inputBus);
 
         void StoreRegister(Register location);
