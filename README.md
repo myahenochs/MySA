@@ -31,7 +31,7 @@ I took this course because I had limited choice in the offered classes, not to p
   4.  Adding parallelism to further create a more true-to-life simulation.
 
 ## To Compile
-  This program was completely developed in Linux and has not been tested in Windows or on a Mac whatsoever.
+  This program was completely developed on Linux using GCC and has not been tested for other circumstances whatsoever.
 
   1. `git clone https://github.com/myahenochs/MySA`
   2. `cd MySA`
@@ -40,4 +40,4 @@ I took this course because I had limited choice in the offered classes, not to p
 ## To Use
   Create a file containing each byte of input on a separate line, then pass it as a command line argument to the program.
   
-  main.cpp has some simple functions to use in order to check input and output and can be changed at will.
+  main.cpp has some simple functions to check input and output.
