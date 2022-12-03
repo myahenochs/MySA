@@ -20,7 +20,6 @@ int main(int argc, char *argv[]){
     Bus *aBus = new Bus;
     Memory ram(dBus, aBus);
     CPU cpu(&ram, dBus, aBus);
-    MMU mmu(&ram, dBus, aBus);
     std::ifstream inFile;
     std::string input, filename;
     bool start = false;
