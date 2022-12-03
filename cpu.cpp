@@ -1,5 +1,4 @@
 #include "cpu.hpp"
-#include <bitset> //temporary for testing
 
 CPU::CPU(Memory *memory, Bus *dataBus, Bus *addressBus): 
     internalBus(new Bus),
