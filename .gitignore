@@ -38,3 +38,6 @@ mysa
 .vscode/dryrun.log
 .vscode/targets.log
 .vscode/settings.json
+.vscode/launch.json
+.gitignore
+.vscode/tasks.json
