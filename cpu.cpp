@@ -79,36 +79,30 @@ bool CPU::IsHalted() const{
 }
 
 void CPU::NOP(){
-    std::cout << "=== NOP ===" << std::endl;
     return;
 }
 
 void CPU::LDA(){
-    std::cout << "=== LDA ===" << std::endl;
     internalBus->data = GetNext();
     rf.StoreRegister(A_REG);
 }
 
 void CPU::LDX(){
-    std::cout << "=== LDX ===" << std::endl;
     internalBus->data = GetNext();
     rf.StoreRegister(X_REG);
 }
 
 void CPU::LDY(){
-    std::cout << "=== LDY ===" << std::endl;
     internalBus->data = GetNext();
     rf.StoreRegister(Y_REG);
 }
 
 void CPU::LDZ(){
-    std::cout << "=== LDZ ===" << std::endl;
     internalBus->data = GetNext();
     rf.StoreRegister(Z_REG);
 }
 
 void CPU::STA(){
-    std::cout << "=== STA ===" << std::endl;
     mmu.SetMAR(GetNext());
     mmu.SetMDR(rf.GetRegister(A_REG));
     mmu.SetReadWrite(1);
@@ -116,7 +110,6 @@ void CPU::STA(){
 }
 
 void CPU::STX(){
-    std::cout << "=== STX ===" << std::endl;
     mmu.SetMAR(GetNext());
     mmu.SetMDR(rf.GetRegister(X_REG));
     mmu.SetReadWrite(1);
@@ -124,7 +117,6 @@ void CPU::STX(){
 }
 
 void CPU::STY(){
-    std::cout << "=== STY ===" << std::endl;
     mmu.SetMAR(GetNext());
     mmu.SetMDR(rf.GetRegister(Y_REG));
     mmu.SetReadWrite(1);
@@ -132,7 +124,6 @@ void CPU::STY(){
 }
 
 void CPU::STZ(){
-    std::cout << "=== STZ ===" << std::endl;
     mmu.SetMAR(GetNext());
     mmu.SetMDR(rf.GetRegister(Z_REG));
     mmu.SetReadWrite(1);
@@ -140,120 +131,95 @@ void CPU::STZ(){
 }
 
 void CPU::ADD(){
-    std::cout << "=== ADD ===" << std::endl;
     alu.SetInstruction(ADD_);
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.SetOp2(GetNext());
     alu.Run();
-    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
 void CPU::SUB(){
-    std::cout << "=== SUB ===" << std::endl;
     alu.SetInstruction(SUB_);
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.SetOp2(GetNext());
     alu.Run();
-    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
 void CPU::NOT(){
-    std::cout << "=== NOT ===" << std::endl;
     alu.SetInstruction(NOT_);
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.Run();
-    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
 void CPU::AND(){
-    std::cout << "=== NOT ===" << std::endl;
     alu.SetInstruction(AND_);
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.SetOp2(GetNext());
     alu.Run();
-    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
 void CPU::OR(){
-    std::cout << "=== OR ===" << std::endl;
     alu.SetInstruction(OR_);
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.SetOp2(GetNext());
     alu.Run();
-    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
 void CPU::XOR(){
-    std::cout << "=== XOR ===" << std::endl;
     alu.SetInstruction(XOR_);
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.SetOp2(GetNext());
     alu.Run();
-    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
 void CPU::BSL(){
-    std::cout << "=== OR ===" << std::endl;
     alu.SetInstruction(BSL_);
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.Run();
-    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
 void CPU::BSR(){
-    std::cout << "=== OR ===" << std::endl;
     alu.SetInstruction(BSL_);
     alu.SetOp1(rf.GetRegister(A_REG));
     alu.Run();
-    std::cout << "RESULT: " << std::hex << +internalBus->data << std::endl;
     rf.StoreRegister(A_REG);
 }
 
 void CPU::JMP(){
-    std::cout << "=== JMP ===" << std::endl;
     pc = GetNext();
 }
 
 void CPU::JMZ(){
-    std::cout << "=== JMZ ===" << std::endl;
 
     if(alu.GetStatus()&ZERO){
-        std::cout << "ZERO" << std::endl;
         pc = GetNext();
     }
     else{
-        std::cout << "NOT ZERO" << std::endl;
         GetNext();
     }
 }
 
 void CPU::JNZ(){
-    std::cout << "=== JNZ ===" << std::endl;
 
     if(alu.GetStatus()&ZERO){
-        std::cout << "ZERO" << std::endl;
         GetNext();
     }
     else{
-        std::cout << "NOT ZERO" << std::endl;
         pc = GetNext();
     }
 }
 
 void CPU::HLT(){
-    std::cout << "=== HLT ===" << std::endl;
     halt = true;
 }
 
 void CPU::RST(){
-    std::cout << "=== RST ===" << std::endl;
     pc = 0;
     alu.SetStatus(0x00);
 }
