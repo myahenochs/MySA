@@ -1,8 +1,11 @@
 #include "memory.hpp"
 
-Memory::Memory(Bus *dBus, Bus *aBus, int size): MAX_SIZE(size), dataBus(dBus), addressBus(aBus){
-    mem = new uint8_t[MAX_SIZE];
-}
+Memory::Memory(Bus *dBus, Bus *aBus, int size): 
+    MAX_SIZE(size), 
+    dataBus(dBus), 
+    addressBus(aBus), 
+    mem(new uint8_t[MAX_SIZE])
+{}
 
 Memory::~Memory(){
     delete[] mem;

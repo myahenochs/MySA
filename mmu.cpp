@@ -1,8 +1,10 @@
 #include "mmu.hpp"
 
-MMU::MMU(Memory *memory, Bus *dBus, Bus *aBus): ram(memory), dataBus(dBus), addressBus(aBus){
-
-}
+MMU::MMU(Memory *memory, Bus *dBus, Bus *aBus): 
+    ram(memory), 
+    dataBus(dBus), 
+    addressBus(aBus)
+{}
 
 MMU::~MMU(){
     ram = nullptr;
