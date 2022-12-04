@@ -23,42 +23,37 @@ int main(int argc, char *argv[]){
     std::string input, filename;
     int hex = 0x00, inc = 0;
 
-    if(argc == 2){
-        filename = argv[1];
-
-        ram.SetReadWrite(1);
-
-        inFile.open(filename);
-        while (inc <= ram.MAX_SIZE && !inFile.eof()){
-            inFile >> std::hex >> hex;
-            aBus->data = inc;
-            dBus->data = hex;
-            ram.Run();
-            ++inc;
-        }
-        inFile.close();
-
-        OutputMemory(ram, dBus, aBus);
-
-        std::cout << "Continue? y/n > ";
-        input = getchar();
-        std::cout << std::endl;
-        // for (auto & c: input) c = toupper(c);
-        input = toupper(input[0]);
-
-        if(input == "Y" && inc > 0){
-            while(cpu.pc <= ram.MAX_SIZE && !cpu.IsHalted()){
-                cpu.Fetch();
-            }
-
-            std::cout << std::endl;
-            OutputRegFile(cpu.rf);
-            OutputStatus(cpu.alu);
-            OutputMemory(ram, dBus, aBus);
-        }
+    if (argc != 2) {
+        std::cerr << "Error: please provide a single file name as an argument." << std::endl;
+        exit(1);
     }
-    else{
-        std::cout << "Please enter a file name as an argument." << std::endl;
+
+    filename = argv[1];
+    ram.SetReadWrite(1);
+
+    inFile.open(filename);
+    while (inc <= ram.MAX_SIZE && !inFile.eof()){
+        inFile >> std::hex >> hex;
+        aBus->data = inc;
+        dBus->data = hex;
+        ram.Run();
+        ++inc;
+    }
+    inFile.close();
+
+    OutputMemory(ram, dBus, aBus);
+    std::cout << "Continue? y/n > ";
+    input = getchar();
+    std::cout << std::endl;
+
+    if(toupper(input.front()) == 'Y' && inc > 0){
+        while(cpu.pc <= ram.MAX_SIZE && !cpu.IsHalted()){
+            cpu.Fetch();
+        }
+        std::cout << std::endl;
+        OutputRegFile(cpu.rf);
+        OutputStatus(cpu.alu);
+        OutputMemory(ram, dBus, aBus);
     }
 
     return 0;
