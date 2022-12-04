@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> // for demos
 #include <fstream>
 #include <bitset>
 #include "alu.hpp"
@@ -8,6 +8,7 @@
 #include "mmu.hpp"
 #include "cpu.hpp"
 
+// these functions are used only for debugging and demos
 void OutputBus(const Bus *bus);
 void OutputStatus(const ALU &alu);
 void OutputRegFile(const RegisterFile &rf);
