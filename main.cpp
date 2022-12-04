@@ -25,16 +25,16 @@ int main(int argc, char *argv[]){
 
     if (argc != 2) {
         std::cerr << "Error: please provide a single file name as an argument." << std::endl;
-        exit(1);
+        std::exit(1);
     }
 
     filename = argv[1];
     inFile.open(filename);
     if (!inFile) {
         std::cerr << "Error: unable to open file '" << filename << "'." << std::endl;
-        exit(1);
+        std::exit(1);
     }
-    
+
     ram.SetReadWrite(1);
     while (inc <= ram.MAX_SIZE && !inFile.eof()){
         inFile >> std::hex >> hex;
