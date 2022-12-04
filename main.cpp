@@ -46,11 +46,9 @@ int main(int argc, char *argv[]){
         // for (auto & c: input) c = toupper(c);
         input = toupper(input[0]);
 
-        if(input == "Y"){
-            if(inc > 0){
-                do{
-                    cpu.Fetch();
-                }while (cpu.pc <= ram.MAX_SIZE && !cpu.IsHalted());
+        if(input == "Y" && inc > 0){
+            while(cpu.pc <= ram.MAX_SIZE && !cpu.IsHalted()){
+                cpu.Fetch();
             }
 
             std::cout << std::endl;
