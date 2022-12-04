@@ -97,12 +97,29 @@ class CPU{
             //a <- ALUA - ALUB
 
         void NOT();
+            //ALUA <- a
+            //a <- ~ALUA
 
         void AND();
+            //ALUA <- a
+            //mar <- pc
+            //mdr <- M[mar]
+            //ALUB <- mdr
+            //a <- ALUA & ALUB
 
         void OR();
+            //ALUA <- a
+            //mar <- pc
+            //mdr <- M[mar]
+            //ALUB <- mdr
+            //a <- ALUA | ALUB
 
         void XOR();
+            //ALUA <- a
+            //mar <- pc
+            //mdr <- M[mar]
+            //ALUB <- mdr
+            //a <- ALUA (+) ALUB
 
         void BSL();
 
@@ -115,7 +132,7 @@ class CPU{
         void JNZ();
 
         void HLT();
-            //
+            //Stops the CPU
 
         void RST();
             //pc <- 0
