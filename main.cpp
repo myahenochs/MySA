@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <bitset>
 #include "alu.hpp"
 #include "registerfile.hpp"
@@ -31,21 +30,12 @@ int main(int argc, char *argv[]){
         ram.SetReadWrite(1);
 
         inFile.open(filename);
-        while (!start && !inFile.eof()){
-            std::stringstream ss;
-            getline(inFile, input);
-            ss << input;
-
-            if(inc <= ram.MAX_SIZE){
-                ss >> std::hex >> hex;
-                aBus->data = inc;
-                dBus->data = hex;
-                ram.Run();
-            }
-            else{
-                start = true;
-            }
-            inc++;
+        while (inc <= ram.MAX_SIZE && !inFile.eof()){
+            inFile >> std::hex >> hex;
+            aBus->data = inc;
+            dBus->data = hex;
+            ram.Run();
+            ++inc;
         }
         inFile.close();
 
