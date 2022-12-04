@@ -32,7 +32,6 @@ int main(int argc, char *argv[]){
 
         inFile.open(filename);
         while (!start && !inFile.eof()){
-
             std::stringstream ss;
             getline(inFile, input);
             ss << input;
@@ -55,7 +54,8 @@ int main(int argc, char *argv[]){
         std::cout << "Continue? y/n > ";
         input = getchar();
         std::cout << std::endl;
-        for (auto & c: input) c = toupper(c);
+        // for (auto & c: input) c = toupper(c);
+        input = toupper(input[0]);
 
         if(input == "Y"){
             if(inc > 0){
