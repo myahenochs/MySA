@@ -21,7 +21,6 @@ int main(int argc, char *argv[]){
     CPU cpu(&ram, dBus, aBus);
     std::ifstream inFile;
     std::string input, filename;
-    bool start = false;
     int hex = 0x00, inc = 0;
 
     if(argc == 2){
