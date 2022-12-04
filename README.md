@@ -1,10 +1,7 @@
 # MySA
 (Actual title in the works)
 
-Design and implementation an 8-Bit ISA simulation done for my CSCI 480 course.
-
-The course goal is to do research, then design and implement a project in preparation for grad school.
-I took this course because I had limited choice in the offered classes, not to prepare for grad school, so my project's goal is to make something I'm interested in and proud of at the end--a test of my own ability to design and learn to finish a solid implementation.
+Design and implementation an 8-Bit ISA simulation done for an undergrad course that I decided to continue.
 
 ## Project Goals:
   1.  *Real-world hardware fidelity*: While this ISA design does not have physical limitations, as it is being implemented in software, they will still be considered. The intention is to create the ISA in such a way that a hardware implementation would be possible, given the means. 
