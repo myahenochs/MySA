@@ -38,7 +38,6 @@ int main(int argc, char *argv[]){
 
     ram.SetReadWrite(1);
     while (inc <= ram.MAX_SIZE && inFile >> std::hex >> hex){
-        // inFile >> std::hex >> hex;
         aBus->data = inc;
         dBus->data = hex;
         ram.Run();
