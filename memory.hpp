@@ -7,7 +7,6 @@ class Memory{
     public:
 
         const int MAX_SIZE;
-        static const int KILOBYTE = 1024;
 
         Memory(Bus *dataBus, Bus *addressBus, int size=KILOBYTE/8);
         ~Memory();
