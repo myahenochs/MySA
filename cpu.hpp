@@ -122,8 +122,12 @@ class CPU{
             //a <- ALUA (+) ALUB
 
         void BSL();
+            //ALUA <- a
+            //a <- <<ALUA
 
         void BSR();
+            //ALUA <- a
+            //a <- >>ALUA
 
         void JMP();
 
